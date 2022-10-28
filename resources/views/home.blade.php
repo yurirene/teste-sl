@@ -88,7 +88,7 @@ $meu_array = array();
 array_push($meu_array, 1,3,2,8,4,7,3);
 
 //3) Imprima o número da posição 3 do array
-echo($meu_array[2]);
+echo($meu_array[3]);
 
 //4) Crie uma variável com todas as posições do array no formato de string separado por vírgula
 $formato_string = implode(',',$meu_array)

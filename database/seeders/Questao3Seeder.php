@@ -31,7 +31,7 @@ class Questao3Seeder extends Seeder
             ],
             4 => [
                 'cpf' => '21142450040',
-                'nome' => 'Bruce Banne'
+                'nome' => 'Bruce Banner'
             ],
             5 => [
                 'cpf' => '83257946074',
