@@ -281,7 +281,7 @@ $novo_array = array_reverse($novo_array);
         </div>
     </div>
     <div class="modal fade" id="modalConsultar" tabindex="-1" aria-labelledby="modalConsultarLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-lg  modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="modalConsultarTitle">Consultar</h1>
@@ -289,13 +289,17 @@ $novo_array = array_reverse($novo_array);
                 </div>
                 <form method="post">
                     <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-12">
+                        <div class="row d-flex align-items-end">
+                            <div class="col-md-8">
                                 <label>Termo de Busca</label>
                                 <input class="form-control" type="text" id="termo" autocomplete="off" required/>
                             </div>
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-primary" id="consultar" >Filtrar</button>
+                                <button type="button" class="btn btn-danger" id="limpar" >Limpar</button>
+                            </div>
                         </div>
-                        <div class="row">
+                        <div class="row mt-5">
                             <div class="col-md-12">
                                 <div class="table-fluid">
                                     <table class="table" id="tabela-pesquisa">
@@ -317,7 +321,6 @@ $novo_array = array_reverse($novo_array);
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary fecharModal" data-bs-dismiss="modal">Fechar</button>
-                        <button type="button" class="btn btn-primary" id="consultar" >Consultar</button>
                     </div>
 
                 </form>
@@ -333,6 +336,12 @@ $novo_array = array_reverse($novo_array);
         $('.fecharModal').on('click', function() {
             $(this).parents('form:first').trigger("reset");
         });
+
+        const exampleModal = document.getElementById('modalConsultar')
+        exampleModal.addEventListener('show.bs.modal', event => {
+            buscar();
+        })
+
         $('#cadastrar').on('click', function() {
             $(this).attr('disabled', true);
             $('.erro').hide();
@@ -364,6 +373,14 @@ $novo_array = array_reverse($novo_array);
             })
         })
         $('#consultar').on('click', function() {
+           buscar();
+        })
+        $('#limpar').on('click', function() {
+            $('#termo').val(null);
+            buscar();
+        })
+
+        function buscar() {
             $.ajax({
                 type: 'POST',
                 url: "{{route('primeira-questao.search')}}",
@@ -389,7 +406,7 @@ $novo_array = array_reverse($novo_array);
                     }
                 }
             })
-        })
+        }
     </script>
 </body>
 </html>

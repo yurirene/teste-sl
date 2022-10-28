@@ -33,13 +33,12 @@ class PrimeiraQuestaoService
     public static function search(array $request) : ?array
     {
         try {
-            if (empty(trim($request['termo']))) {
-                return [];
-            }
-            return PrimeiraQuestao::where('name', 'like', '%'. $request['termo'] . '%')
-                ->orWhere('username', 'like', '%'. $request['termo'] . '%')
-                ->orWhere('email', 'like', '%'. $request['termo'] . '%')
-                ->orWhere('zipcode', 'like', '%'. $request['termo'] . '%')
+            return PrimeiraQuestao::when(!empty($request['termo']), function($sql) use ($request) {
+                return $sql->where('name', 'like', '%'. $request['termo'] . '%')
+                    ->orWhere('username', 'like', '%'. $request['termo'] . '%')
+                    ->orWhere('email', 'like', '%'. $request['termo'] . '%')
+                    ->orWhere('zipcode', 'like', '%'. $request['termo'] . '%');
+                })
                 ->get()
                 ->map(function($item) {
                     return [
