@@ -91,7 +91,7 @@ array_push($meu_array, 1,3,2,8,4,7,3);
 echo($meu_array[3]);
 
 //4) Crie uma variável com todas as posições do array no formato de string separado por vírgula
-$formato_string = implode(',',$meu_array)
+$formato_string = implode(',',array_keys($meu_array))
 
 //5) Crie um novo array a partir da variável no formato de string que foi criada e destrua o array anterior
 $novo_array = array_map('intval', explode(',', $formato_string));
