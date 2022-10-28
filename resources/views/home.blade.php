@@ -227,6 +227,28 @@ $novo_array = array_reverse($novo_array);
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col">
+                                    <pre>
+                                        <code class="language-php">
+SELECT 
+    CONCAT(usuarios.nome, ' - ', infos.genero) as usuario,
+    CASE 
+        WHEN (YEAR(CURDATE()) - infos.ano_nascimento > 50) 
+        THEN 'SIM' 
+        ELSE 'NÃO' 
+    END maior_50_anos
+FROM usuarios 
+JOIN infos ON infos.cpf = usuarios.cpf
+WHERE 
+    infos.genero = 'M'
+ORDER BY 
+    usuarios.cpf asc
+LIMIT 3                                            
+                                        </code>
+                                    </pre>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
